@@ -10,7 +10,6 @@ public class Grid extends GraphicsGroup {
     private Rectangle board;
     public List<Rectangle> cells = new ArrayList();
     private int x = 90;
-    private int xnew = x;
     private int y = 190;
 
 
@@ -18,16 +17,19 @@ public class Grid extends GraphicsGroup {
     public Grid() {
         board = new Rectangle(x,y,GRID_WIDTH,GRID_HEIGHT);
         add(board);
-        for (int i=0;i<9;i++) {
-            if (xnew + GRID_WIDTH/3 > x + GRID_WIDTH) {
-                xnew = x;
-                y += GRID_HEIGHT/3;
-            }
-            Rectangle cell = new Rectangle(xnew,y,GRID_WIDTH/3,GRID_HEIGHT/3);
+        for(int row = 0; row <3; row ++){
+
+
+        for (int column = 0; column <3; column++) {
+            double cellX = x + column * (GRID_WIDTH /3);
+            double cellY = y + row * (GRID_HEIGHT/3);
+
+            Rectangle cell = new Rectangle(cellX,cellY,GRID_WIDTH/3,GRID_HEIGHT/3);
             add(cell);
             cells.add(cell);
-            xnew += GRID_WIDTH/3;
         }
+    }
+
     }
 
     public List<Rectangle> getCells() {
